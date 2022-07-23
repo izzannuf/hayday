@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/create_histori_hewan' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Buat Pesanan</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            </br>
+            </br>
+            <label for="">ID Pesanan</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="id_pesanan" id="id_pesanan" required value="{{id_new_pesanan}}" disabled>
+            </br>
+            </br>
+            <label for="">Nama Pesanan</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="nama_pesanan" id="nama_pesanan" required>
+            </br>
+            </br>
+            <label for="">Jenis Pesanan</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="jenis_pesanan" id="jenis_pesanan" required>
+            </br>
+            </br>
+            </br>
+            <label for=""><b>Detail Pesanan</b></label>
+            </br>
+            </br>
+            {% for i in list_produk %}
+            <label for="">{{ i.nama }}</label>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="{{ i.id }}" id="{{ i.id }}" value=0 min=0 max=999 required>
+            </br>
+            {% endfor %}
+            </br>
+            </br>
+            <div align='center'>
+                <button type='submit'>Buat</button>      
+            </div>
+            </br>
+            </br>
+        </div> 
+
+    </form>
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <h1>Pengguna tidak dapat membuat pesanan</h1>
+    {% endif %}
+
+</body>
+
+</html>

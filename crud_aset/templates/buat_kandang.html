@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_aset.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Buat Aset Kandang</h1>
+
+    {% include 'navbar.html' %}
+
+    <form action = "" method = "POST" name="form" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            </br>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                <input type="text" class="form-control" placeholder="Harap diisi" name="Nama">
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                <input type="number" class="form-control" placeholder="Harap diisi" name="MinimumLevel">
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                <input type="number" class="form-control" placeholder="Harap diisi" name="HargaBeli">
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Kapasitas Maks:</label>
+                <input type="number" class="form-control" placeholder="Harap diisi" name="KapasitasMaks">
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Jenis Hewan:</label>
+                <input type="text" class="form-control" placeholder="Harap diisi" name="JenisHewan">
+            </div>
+            </br>
+            <div align='center'>
+                <button type='submit'>Tambahkan</button>      
+            </div>
+        </div> 
+    </form>
+    
+</body>
+
+<script>
+
+    function validateForm() {
+        var nm = document.forms["form"]['Nama'].value;
+        var ml = document.forms["form"]['MinimumLevel'].value;
+        var hb = document.forms["form"]['HargaBeli'].value;
+        var km = document.forms["form"]['KapasitasMaks'].value;
+        var jh = document.forms["form"]['JenisHewan'].value;
+        if (nm == "" || ml == "" || hb == "" || km == "" || jh == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+
+</script>
+
+</html>

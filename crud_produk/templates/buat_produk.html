@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_produk.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Buat Produk</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <form name="form" action = "" method = "POST" onsubmit = "return validateForm()">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="id_IdProduk">Jenis Produk</label>
+            </br>
+            <select id="id_ID" name="IdProduk">
+                <option value="HP">Hasil Panen</option>
+                <option value="PH">Produk Hewan</option>
+                <option value="PM">Produk Makanan</option>
+              </select>
+            </br>
+            <label for="id_Nama">Nama</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="Nama" >
+            </br>
+            <label for="id_HargaJual">Harga Jual</label>
+            </br>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="HargaJual">
+            <p id="alert"></p>
+            </br>
+            <label for="id_SifatProduk">Sifat Produk</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="SifatProduk" >
+            </br>
+            <div align='center'>
+                <button type='submit'>Buat</button>      
+            </div>
+        </div> 
+    </form>
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <h1>Pengguna tidak dapat buat Produk</h1>
+    {% endif %}
+
+</body>
+
+<script>
+    function validateForm() {
+        var x = document.forms["form"]['Nama'].value;
+        var y = document.forms["form"]['HargaJual'].value;
+        var z = document.forms["form"]['SifatProduk'].value;
+        if (x == "" || y == "" || z == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        } 
+    } 
+</script>
+
+</html>
+
+
+

@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ubah_produksi.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Ubah Produksi</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="id_IdProduk">Nama Produk Makanan</label>
+            </br>
+            <select id="id_ID" name="IdProduk">
+                <option value="{{ res.idproduk }}" selected readonly>{{ res.nama }}</option>
+            </select>
+            </br>
+
+            </br>
+            <label for="">Alat Produksi</label>
+            </br>
+            <select id="id_IDA" name="IdAlat">
+                <option value="{{ res.idalat }}" selected readonly>{{ res.namaaset }}</option>
+            </select>
+            </br>
+
+            <label for="">Durasi Produksi (dalam menit)</label>
+            </br>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Durasi" value="{{ res.durasi }}">
+            </br>
+            <label for="">Jumlah Produk yang Dihasilkan</label>
+            </br>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" value="{{ res.jumlah_unit_hasil }}">
+            </br>
+
+            <a>Daftar Bahan Yang Dibutuhkan</a>
+            <br>
+
+            {% for no, ress in result2 %}
+            <label for="">Bahan</label>
+            <select id="" name="ID">
+                <option value="{{ ress.bahan }}" selected="true" disabled>{{ ress.bahan }}</option>
+            </select>
+
+            <label for="">Jumlah</label>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" value="{{ ress.jumlah }}" disabled>
+            </br>
+            {% endfor %}
+
+            <div align='center'>
+                <button type='submit'>Simpan</button>      
+            </div>
+        </div> 
+
+    </form>
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <h1>Pengguna tidak dapat mengubah Produksi</h1>
+    {% endif %}
+
+</body>
+
+<script>
+    function validateForm() {
+        var y = document.forms["form"]['AlatProduksi'].value;
+        var z = document.forms["form"]['DurasiProduksi'].value;
+        var xx = document.forms["form"]['JumlahProduk'].value;
+        if (y == "" || z == "" || xx == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+</script>
+
+</html>
+
+
+

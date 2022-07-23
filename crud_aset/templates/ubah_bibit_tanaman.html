@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_aset.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Update Aset Kategori Bibit Tanaman</h1>
+
+    {% include 'navbar.html' %}
+
+    <form name="form" action = "" method = "POST" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            </br>
+            <div class="form-group">
+                <label>ID:</label>
+                {{ form.ID }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Nama:</label>
+                {{ form.Nama }}
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Minimum Level:</label>
+                <input type="number" class="form-control" placeholder="Harap diisi" name="MinimumLevel">
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Harga Beli:</label>
+                <input type="number" class="form-control" placeholder="Harap diisi" name="HargaBeli">
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Durasi Panen:</label>
+                <input type="text" class="form-control" placeholder="Harap diisi" name="DurasiPanen">
+            </div>
+            </br>
+            <div align='center'>
+                <button type='submit'>Simpan</button>      
+            </div>
+        </div>
+    </form>
+
+</body>
+
+<script>
+
+    function validateForm() {
+        var ml = document.forms["form"]['MinimumLevel'].value;
+        var hb = document.forms["form"]['HargaBeli'].value;
+        var dp = document.forms["form"]['DurasiPanen'].value;
+        if (ml == "" || hb == "" || dp == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+
+</script>
+
+</html>

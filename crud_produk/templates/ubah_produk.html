@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_produk.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Ubah Produk</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="id_ID">Jenis Produk</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Jenis Produk yang Dipilih" name="JenisProduk" value="{{ result.jenisproduk }}"disabled>
+            </br>
+            <label for="id_Nama">Nama</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Nama Produk yang Dipilih" name="Nama" value="{{ result.nama }}"disabled>
+            </br>
+            <label for="id_HargaJual">Harga Jual</label>
+            </br>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="HargaJual">
+            </br>
+            <label for="id_SifatProduk">Sifat Produk</label>
+            </br>
+            <input type="text" class="form-control" placeholder="Harap diisi" name="SifatProduk">
+            </br>
+            <div align='center'>
+                <button type='submit'>Simpan</button>      
+            </div>
+        </div>
+    </form>
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    <h1>Pengguna tidak dapat mengubah Produk</h1>
+
+    {% endif %}
+
+</body>
+
+<script>
+    function validateForm() {
+        var y = document.forms["form"]['HargaJual'].value;
+        var z = document.forms["form"]['SifatProduk'].value;
+        if (y == "" || z == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+</script>
+
+</html>
+
+
+

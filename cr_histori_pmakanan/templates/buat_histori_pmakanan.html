@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_histori_makanan.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Produksi Produk Makanan</h1>
+
+    {% if role == 'admin' %}
+    {% include 'navbar.html' %}
+
+    <h1>Admin tidak dapat Produksi Produk Makanan</h1>
+
+    {% endif %}
+
+    {% if role == 'pengguna' %}
+    {% include 'navbar.html' %}
+
+    {% if gagal == 'gapunyabahan' %}
+        <body onload = "return alertt()">
+    {% endif %}
+
+    {% if gagal == 'gapunyaaset' %}
+        <body onload = "return alerttdua()">
+    {% endif %}
+
+    <form action = "" method = "POST" name="form" onsubmit = "return validateForm()">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            <label for="id_IdProduk">ID Produk Makanan</label>
+            <br>
+            <select id="id_IdProduk" name="IdProduk">
+                {% for res in result %}
+                    <option value="{{ res.id }}">{{ res.nama }}</option>
+                {% endfor %}
+            </select>
+            </br>
+
+            <label for="id_Jumlah">Jumlah</label>
+            </br>
+            <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" id="jmlh" onchange="countXP()">
+            </br>
+            
+            <label for="id_XP">XP</label>
+            </br>
+            <input type="number" class="form-control" placeholder="" name="XP" id="xpp" disabled>
+            </br>
+
+            <div align='center'>
+                <button type='submit'>Buat</button>      
+            </div>
+        </div>
+    </form>
+
+    {% endif %}
+
+</body>
+
+<script>
+    function countXP() {
+        document.getElementById("xpp").value = 5 * document.getElementById("jmlh").value;
+    }
+
+    function validateForm() {
+        var y = document.forms["form"]['Jumlah'].value;
+        if (y == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+
+    function alertt() {
+        alert('Anda tidak memiliki bahan yang cukup, silahkan menambahkan produk yang akan digunakan sebagai bahan terlebih dahulu');
+    }
+
+    function alerttdua() {
+        alert('Anda tidak memiliki aset (alat) yang dibutuhkan');
+    }
+</script>
+
+</html>
+
+
+

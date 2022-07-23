@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buat_transaksi_pembelian_aset.css' %}">
+
+  <title>TK3-F04</title>
+</head>
+
+<body>
+    <h1>Form Buat Transaksi Pembelian Aset</h1>
+
+    {% include 'navbar.html' %}
+
+    <form name="form" action = "" method = "POST" onsubmit = "return validateForm()">
+        {% csrf_token %}
+        <div class="container" align='center'>
+            </br>
+            <label for="id_detail_aset">Detail Aset:</label>
+            <select id="id_detail_aset" name="id_detail_aset">
+                {% for detail in DetailAset %}
+                <option>{{ detail.4 }} - {{ detail.1 }} - {{ detail.2 }}</option>
+                {% endfor %}
+            </select>
+            </br>
+            <div class="form-group">
+                <label for="id_Jumlah">Jumlah:</label>
+                <input type="number" class="form-control" placeholder="Harap diisi" name="Jumlah" id="jmlh">
+            </div>
+            </br>
+            <div align='center'>
+                <button type='submit'>Beli</button>      
+            </div>
+        </div> 
+    </form>
+
+</body>
+
+<script>
+    function validateForm() {
+        var y = document.forms["form"]['Jumlah'].value;
+        if (y == "") {
+            alert("Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu");
+            return false;
+        }
+    } 
+</script>
+
+</html>

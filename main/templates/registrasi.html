@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Welcome to Hiday!</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Pilih Role Anda</h1>
+<!-- <h1>Form Login</h1> -->
+
+<!-- <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+
+</form> -->
+
+<a href="/registrasi-pengguna">Pengguna</a>
+<a href="/registrasi-admin">Admin</a>
+
+{% endblock content %}
